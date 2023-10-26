@@ -1,0 +1,116 @@
+!SESSION 2023-10-25 11:41:46.027 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-10-25 11:42:18.985
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-10-25 11:42:18.991
+!MESSAGE Log4j2 initialized with config file C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-10-25 11:42:22.107
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-10-25 11:51:44.223
+!MESSAGE Indexed 'UDP_CM7' (24 sources, 85 headers) in 3.71 sec: 7,834 declarations; 56,943 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0031%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-10-25 11:51:46.008
+!MESSAGE Indexed 'UDP_CM4' (24 sources, 85 headers) in 1.78 sec: 7,744 declarations; 55,790 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0031%)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2023-10-25 12:50:55.194
+!MESSAGE Error in final launch sequence:
+
+Failed to execute MI command:
+-file-exec-file C:\\Users\\Maciek\\Desktop\\Rozwoj\\UDP_BRIDGE\\UDP_BRIDGE\\UDP_BRIDGE\\STM32\\UDP\\.project
+Error message from debugger back end:
+"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project": not in executable format: file format not recognized
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+-file-exec-file C:\\Users\\Maciek\\Desktop\\Rozwoj\\UDP_BRIDGE\\UDP_BRIDGE\\UDP_BRIDGE\\STM32\\UDP\\.project
+Error message from debugger back end:
+"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project": not in executable format: file format not recognized
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:112)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:252)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
+	at com.st.stm32cube.ide.mcu.debug.launch.DSFDelegate.launch(DSFDelegate.java:334)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:806)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:717)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1040)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.lang.Exception: "C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project": not in executable format: file format not recognized
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2023-10-25 12:50:55.194
+!MESSAGE Failed to execute MI command:
+-file-exec-file C:\\Users\\Maciek\\Desktop\\Rozwoj\\UDP_BRIDGE\\UDP_BRIDGE\\UDP_BRIDGE\\STM32\\UDP\\.project
+Error message from debugger back end:
+"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project": not in executable format: file format not recognized
+!STACK 0
+java.lang.Exception: "C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project": not in executable format: file format not recognized
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2023-10-25 13:11:59.862
+!MESSAGE Error in final launch sequence:
+
+Setup exceptions
+!STACK 1
+org.eclipse.core.runtime.CoreException: Setup exceptions
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:112)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:252)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
+	at com.st.stm32cube.ide.mcu.debug.launch.DSFDelegate.launch(DSFDelegate.java:336)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:806)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:717)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1040)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 com.st.stm32cube.ide.mcu.debug.launch 4 0 2023-10-25 13:11:59.862
+!MESSAGE Setup exceptions
+!SESSION 2023-10-25 14:14:31.282 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
+Framework arguments:  C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\UDP\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-10-25 14:15:56.467
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-10-25 14:15:56.473
+!MESSAGE Log4j2 initialized with config file C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-10-25 14:16:01.782
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-10-25 14:16:04.484
+!MESSAGE Indexed 'UDP_CM4' (24 sources, 85 headers) in 2.47 sec: 7,744 declarations; 55,795 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0031%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-10-25 14:16:09.843
+!MESSAGE Indexed 'UDP_CM7' (109 sources, 185 headers) in 5.28 sec: 12,278 declarations; 87,880 references; 0 unresolved inclusions; 1 syntax errors; 25 unresolved names (0.025%)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2023-10-25 14:21:07.486
+!MESSAGE Error in final launch sequence:
+
+Setup exceptions
+!STACK 1
+org.eclipse.core.runtime.CoreException: Setup exceptions
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:112)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:252)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
+	at com.st.stm32cube.ide.mcu.debug.launch.DSFDelegate.launch(DSFDelegate.java:336)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:806)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:717)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1040)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 com.st.stm32cube.ide.mcu.debug.launch 4 0 2023-10-25 14:21:07.486
+!MESSAGE Setup exceptions
