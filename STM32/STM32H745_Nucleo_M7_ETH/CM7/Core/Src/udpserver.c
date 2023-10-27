@@ -20,7 +20,7 @@ static unsigned short port;
 char msg[100];
 char smsg[200];
 unsigned int reg_mdb[7];
-
+unsigned int setter[5] = {250,1,12,30,10,1};
 
 /*-----------------------------------------------------------------------------------*/
 /**** Send RESPONSE every time the client sends some data ******/
@@ -54,21 +54,59 @@ static void udp_thread(void *arg)
 					int len;  // get the message from the client
 					if (msg[0] == 0x07)
 					{
-						if (msg[1] == 0x04)
-						{
-						len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr4\n", reg_mdb[4]);
-						}
-						if (msg[1] == 0x05)
-						{
-						len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr5\n", reg_mdb[5]);
-						}
-						if (msg[1] == 0x06)
-						{
-						len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr6\n", reg_mdb[6]);
+						switch(msg[1]){
+						case 0:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 0\n", reg_mdb[0]);
+							break;
+						case 1:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 1\n", reg_mdb[1]);
+							break;
+						case 2:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 2\n", reg_mdb[2]);
+							break;
+						case 3:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 3\n", reg_mdb[3]);
+							break;
+						case 4:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 4\n", reg_mdb[4]);
+							break;
+						case 5:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 5\n", reg_mdb[5]);
+							break;
+						case 6:
+							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 6\n", reg_mdb[6]);
+							break;
 						}
 					}
+						else if (msg[0] == 0x0E)
+						{
+							switch(msg[1]){
+							case 0:
+								reg_mdb[0] = msg[2];
+								len = sprintf (smsg, " Ustawiono milisekundy na \"%i\" \n", reg_mdb[0]);
+								break;
+							case 1:
+								reg_mdb[1] = msg[2];
+								len = sprintf (smsg, " Ustawiono sekundy na \"%i\" \n", reg_mdb[1]);
+								break;
+							case 2:
+								reg_mdb[2] = msg[2];
+								len = sprintf (smsg, " Ustawiono minuty na \"%i\" \n", reg_mdb[2]);
+								break;
+							case 3:
+								reg_mdb[3] = msg[2];
+								len = sprintf (smsg, " Ustawiono godziny na \"%i\" \n", reg_mdb[3]);
+								break;
+
+							case 6:
+								setter[0] = msg[2]*256 + msg[3];
+								len = sprintf (smsg, " Ustawiono napiecie na \"%i\" \n", setter[0]);
+								break;
+							}
+						}
+
 					else
-						{len = sprintf (smsg, "\"%i\" bledne zapytanie \n", msg);}
+						{len = sprintf (smsg, "\"%s\" bledne zapytanie \n", msg);}
 					// Or modify the message received, so that we can send it back to the client
 					//int len = sprintf (smsg, "\"%s\" was sent by the Client\n", (char *) buf->p->payload);
 

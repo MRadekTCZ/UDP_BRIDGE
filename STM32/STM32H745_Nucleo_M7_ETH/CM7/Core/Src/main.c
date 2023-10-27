@@ -80,7 +80,7 @@ unsigned int elapsedTime;
 extern char smsg[200];
 extern char msg[100];
 extern unsigned int reg_mdb[7];
-extern unsigned int setter[2] = {250,1};
+extern unsigned int setter[5];
 
 
 /* USER CODE END 0 */
@@ -117,7 +117,10 @@ int main(void)
 
   /* USER CODE BEGIN Init */
   Modbus_reg1.setvoltage = 400;
-
+  Modbus_reg1.currentTime_modbus.hours = 12;
+  Modbus_reg1.currentTime_modbus.minutes = 30;
+  Modbus_reg1.currentTime_modbus.seconds = 10;
+  Modbus_reg1.currentTime_modbus.miliSeconds = 1;
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -317,17 +320,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM13) {
-	  elapsedTime++;
-	  updateCurrentTime(&currentTime, elapsedTime);
-	  updateCurrentTime(&Modbus_reg1.currentTime_modbus, elapsedTime);
-	  Modbus_reg1.setvoltage = setter[0];
-	  reg_mdb[6] = Modbus_reg1.setvoltage;
-
+	  updateCurrentTime(&currentTime, 1);
+	  updateCurrentTime(&Modbus_reg1.currentTime_modbus, 1);
 	  reg_mdb[0] = Modbus_reg1.currentTime_modbus.miliSeconds;
 	  reg_mdb[1] = Modbus_reg1.currentTime_modbus.seconds;
 	  reg_mdb[2] = Modbus_reg1.currentTime_modbus.minutes;
 	  reg_mdb[3] = Modbus_reg1.currentTime_modbus.hours;
-
 
 ;
 
@@ -338,6 +336,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	  sin_current = (unsigned int)round(20000*sin(elapsedTime*0.1*50*3.14)+20000);
 	  Modbus_reg1.sin_current = sin_current;
 	  reg_mdb[5] = Modbus_reg1.sin_current;
+
+	  elapsedTime++;
+
+	  Modbus_reg1.setvoltage = setter[0];
+	  reg_mdb[6] = Modbus_reg1.setvoltage;
+
+
   }
   /* USER CODE END Callback 1 */
 }
