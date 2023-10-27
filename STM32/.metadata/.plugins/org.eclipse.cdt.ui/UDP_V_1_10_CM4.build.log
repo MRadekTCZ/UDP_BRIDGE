@@ -1,0 +1,10 @@
+16:04:35 **** Incremental Build of configuration Debug for project UDP_V_1_10_CM4 ****
+make -j16 all 
+arm-none-eabi-size   UDP_V_1_10_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3128	     24	   1568	   4720	   1270	UDP_V_1_10_CM4.elf
+Finished building: default.size.stdout
+ 
+
+16:04:36 Build Finished. 0 errors, 0 warnings. (took 231ms)
+

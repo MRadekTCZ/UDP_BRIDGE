@@ -1,0 +1,3 @@
+#include <stdio.h>
+#include <main.h>
+void updateCurrentTime(struct Time *currentTime, unsigned int milliseconds);

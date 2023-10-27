@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+struct Time
+{
+	unsigned int hours;
+	unsigned int minutes;
+	unsigned int seconds;
+	unsigned int miliSeconds;
+}currentTime;

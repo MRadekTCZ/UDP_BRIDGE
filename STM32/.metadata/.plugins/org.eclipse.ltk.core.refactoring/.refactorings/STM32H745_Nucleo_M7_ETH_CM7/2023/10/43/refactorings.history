@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;STM32H745_Nucleo_M7_ETH_CM7/Core/Src/udpServer.c&apos; to &apos;udpserver.c&apos;" description="Rename resource &apos;udpServer.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/udpServer.c" name="udpserver.c" stamp="1698330690040" updateReferences="true"/>
+</session>
