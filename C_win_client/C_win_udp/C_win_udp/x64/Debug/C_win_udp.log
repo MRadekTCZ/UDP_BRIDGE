@@ -1,3 +1,1 @@
-﻿  C_win_udp.cpp
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(37,77): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-  C_win_udp.vcxproj -> C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\x64\Debug\C_win_udp.exe
+﻿  C_win_udp.vcxproj -> C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\x64\Debug\C_win_udp.exe
