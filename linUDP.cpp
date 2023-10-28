@@ -11,7 +11,7 @@
 #define SERVER_PORT 4077
 #define SERVER_IP "192.168.3.247"
 
-bool exitprogram;
+
 
 // Funkcja obsługująca odbieranie odpowiedzi od serwera w osobnym wątku
 void ReceiveThread(int clientSocket) {
@@ -42,7 +42,7 @@ int main() {
 
     sockaddr_in clientAddr;
     clientAddr.sin_family = AF_INET;
-    clientAddr.sin_port = htons(1777); // Wybierz numer portu 1777
+    clientAddr.sin_port = htons(CLIENT_PORT); // Wybierz numer portu 1777
     clientAddr.sin_addr.s_addr = INADDR_ANY;
 
     // Przypisz numer portu do gniazda klienta
@@ -70,8 +70,6 @@ int main() {
         std::getline (std::cin,message);
 
         if (message == "q") {
-            
-            exit
             break;
         }
 
