@@ -22,7 +22,7 @@ struct Modbus_ask : Modbus
 struct Modbus_answer : Modbus
 {
 	char data_count;
-	unsigned short int data[255];
+	union Data data[255];
 };
 
 

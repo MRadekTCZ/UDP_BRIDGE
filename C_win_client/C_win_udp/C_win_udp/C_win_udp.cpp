@@ -36,17 +36,18 @@ void ReceiveThread(SOCKET clientSocket) {
             {
                 for (data_inkrement = 0; data_inkrement < response1.data_count; data_inkrement++)
                 {
-                    response1.data[data_inkrement] = buffer[data_inkrement + 3];
+                    response1.data[data_inkrement].data_t[1] = buffer[data_inkrement*2 + 3];
+                    response1.data[data_inkrement].data_t[0] = buffer[data_inkrement*2 + 4];
                 }
-                response1.crc.data_t[0] = buffer[data_inkrement + 4];
-                response1.crc.data_t[1] = buffer[data_inkrement + 5];
+                response1.crc.data_t[0] = buffer[data_inkrement*2 + 5];
+                response1.crc.data_t[1] = buffer[data_inkrement*2 + 6];
                 //Uzaleznic dlugosc odczytywane wektora data od zapytania (ilosc rejestrow) 
                 //Tutaj dopisac funkcje CRC check - jezeli CRC sie nie zgadza to zwraca blad
                 char crc_resp_comp_data[] = { response1.address + response1.function +
-                    response1.data[0] + response1.data[1] };
+                    response1.data[0].data_t[1] + response1.data[0].data_t[0] };
                 int length_crc_comp = sizeof(crc_resp_comp_data);
 
-                unsigned int response_i = response1.data[0] + response1.data[1];
+                unsigned int response_i = response1.data[0].data_t[1] + response1.data[0].data_t[0];
 
                 unsigned short int crc_response_comparison = CRC(crc_resp_comp_data, length_crc_comp, CRCTable);
                 bool b_crc_response_comparison = (crc_response_comparison == response1.crc.data_u) ? true : false;
@@ -54,7 +55,12 @@ void ReceiveThread(SOCKET clientSocket) {
                 b_crc_response_comparison = true;
                 if (b_crc_response_comparison)
                 {
-                    std::cout << "Response: " << response_i << std::endl;
+                    for (data_inkrement = 0; data_inkrement < response1.data_count; data_inkrement++)
+                    {
+                        std::cout << "Response: " << response1.data[data_inkrement].data_u << std::endl;
+                    }
+                    
+                    
                 }
                 else
                 {
