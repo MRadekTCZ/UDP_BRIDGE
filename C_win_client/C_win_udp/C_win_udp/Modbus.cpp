@@ -1,4 +1,4 @@
-#include "Modbus.h"
+//#include "Modbus.h"
 unsigned short int CRC(char* data, int length, unsigned int crcTable[256])
 {
     unsigned int crc = 0xFFFF;
