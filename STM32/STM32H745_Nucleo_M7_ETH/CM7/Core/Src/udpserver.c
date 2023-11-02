@@ -13,14 +13,16 @@
 #include "udpserver.h"
 #include "string.h"
 #include "Modbus.h"
+#include "Modbus_UDP.h"
 static struct netconn *conn;
 static struct netbuf *buf;
 static ip_addr_t *addr;
 static unsigned short port;
 char msg[100];
 char smsg[200];
-unsigned int reg_mdb[7];
-unsigned int setter[5] = {250,1,12,30,10,1};
+unsigned short int reg_mdb[20];
+union Data reg_mdb_word[20];
+unsigned short int setter[5] = {250,1,12,30,10};
 
 /*-----------------------------------------------------------------------------------*/
 /**** Send RESPONSE every time the client sends some data ******/
@@ -45,6 +47,11 @@ static void udp_thread(void *arg)
 			{
 				/* Receive the data from the connection */
 				recv_err = netconn_recv(conn, &buf);
+				for(int reg = 0; reg<20;reg++)
+				{
+					reg_mdb_word[reg].data_u = reg_mdb[reg];
+				}
+
 
 				if (recv_err == ERR_OK) // if the data is received
 				{
@@ -52,8 +59,38 @@ static void udp_thread(void *arg)
 					port = netbuf_fromport(buf);  // get the Port of the client
 					strcpy (msg, buf->p->payload);
 					int len;  // get the message from the client
-					if (msg[0] == 0x07)
+					struct Modbus_ask Ask1;
+					struct Modbus_answer Response1;
+					//Writing exact bytes to modbus struct
+					Ask1.address = msg[0];
+					Ask1.function = msg[1];
+					Ask1.offset.data_t[0] = msg[2];
+					Ask1.offset.data_t[1] = msg[3];
+					Ask1.reg_count.data_t[0] = msg[4];
+					Ask1.reg_count.data_t[1] = msg[5];
+					Ask1.crc.data_t[0] = msg[6];
+					Ask1.crc.data_t[0] = msg[7];
+					Response1.address = msg[0];
+					Response1.function = msg[1];
+					Response1.data_count = 1;
+					int data_inkrement = 0;
+					if (Ask1.address == 0x01 && Ask1.function == 0x03)
 					{
+
+						for (data_inkrement = 0; data_inkrement < Response1.data_count; data_inkrement++)
+							{
+								Response1.data[data_inkrement].data_t[1] = reg_mdb_word->data_t[1+ Ask1.offset.data_u];
+								Response1.data[data_inkrement].data_t[0] = reg_mdb_word->data_t[0+ Ask1.offset.data_u];
+								smsg[3+data_inkrement] = Response1.data[data_inkrement].data_t[1];
+								smsg[4+data_inkrement] = Response1.data[data_inkrement].data_t[0];
+							}
+						smsg[0] = Response1.address;
+						smsg[1] = Response1.function;
+						smsg[2] = Response1.data_count;
+						smsg[5+data_inkrement] = 0xBA; //CRC1
+						smsg[6+data_inkrement] = 0xAB; //CRC2
+						len = 7+data_inkrement;
+						/*
 						switch(msg[1]){
 						case 0:
 							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 0\n", reg_mdb[0]);
@@ -76,7 +113,7 @@ static void udp_thread(void *arg)
 						case 6:
 							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 6\n", reg_mdb[6]);
 							break;
-						}
+						}*/
 					}
 						else if (msg[0] == 0x0E)
 						{

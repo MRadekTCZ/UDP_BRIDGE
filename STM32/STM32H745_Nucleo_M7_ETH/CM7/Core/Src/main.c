@@ -69,18 +69,19 @@ void MX_FREERTOS_Init(void);
 //extern struct netif gnetif;
 unsigned int zmienna1 = 77;
 float zmiennag = 777.7;
-unsigned int zmienna2 = 8;
-unsigned int zmienne[5] = {11,22,33,44,55};
+unsigned short int zmienna2 = 8;
+unsigned short int zmienne[5] = {11,22,33,44,55};
 struct Time currentTime;
 struct Modbus_reg Modbus_reg1;
 
-unsigned int sin_current;
-unsigned int elapsedTime;
+unsigned short int sin_current;
+unsigned short int elapsedTime;
 
 extern char smsg[200];
 extern char msg[100];
-extern unsigned int reg_mdb[7];
-extern unsigned int setter[5];
+extern unsigned short int reg_mdb[20];
+
+extern unsigned short int setter[5];
 
 
 /* USER CODE END 0 */
@@ -92,8 +93,11 @@ extern unsigned int setter[5];
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
+for (int i = 0; i< 10 ; i++)
+{
+	reg_mdb[i] = 1+i*11+i*i*7+i*i*3;
+}
+	/* USER CODE END 1 */
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
 
 /* USER CODE END Boot_Mode_Sequence_0 */
@@ -241,7 +245,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         // Tutaj umieść kod obsługi przerwania
         // Możesz np. zmienić stan diody LED lub wykonać inne czynności
     	Modbus_reg1.counter_bt1 ++;
-    	reg_mdb[4] = (Modbus_reg1.counter_bt1);
+    	reg_mdb[14] = (Modbus_reg1.counter_bt1);
     }
 }
 
@@ -322,10 +326,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (htim->Instance == TIM13) {
 	  updateCurrentTime(&currentTime, 1);
 	  updateCurrentTime(&Modbus_reg1.currentTime_modbus, 1);
-	  reg_mdb[0] = Modbus_reg1.currentTime_modbus.miliSeconds;
-	  reg_mdb[1] = Modbus_reg1.currentTime_modbus.seconds;
-	  reg_mdb[2] = Modbus_reg1.currentTime_modbus.minutes;
-	  reg_mdb[3] = Modbus_reg1.currentTime_modbus.hours;
+	  reg_mdb[10] = Modbus_reg1.currentTime_modbus.miliSeconds;
+	  reg_mdb[11] = Modbus_reg1.currentTime_modbus.seconds;
+	  reg_mdb[12] = Modbus_reg1.currentTime_modbus.minutes;
+	  reg_mdb[13] = Modbus_reg1.currentTime_modbus.hours;
 
 ;
 
@@ -335,12 +339,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	  sin_current = (unsigned int)round(20000*sin(elapsedTime*0.1*50*3.14)+20000);
 	  Modbus_reg1.sin_current = sin_current;
-	  reg_mdb[5] = Modbus_reg1.sin_current;
+	  reg_mdb[15] = Modbus_reg1.sin_current;
 
 	  elapsedTime++;
 
 	  Modbus_reg1.setvoltage = setter[0];
-	  reg_mdb[6] = Modbus_reg1.setvoltage;
+	  reg_mdb[16] = Modbus_reg1.setvoltage;
 
 
   }

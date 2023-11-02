@@ -1,0 +1,2 @@
+../Core/Src/Modbus_UDP.c:2:20:CRC_check	32	static
+../Core/Src/Modbus_UDP.c:11:6:ModbusInit	32	static

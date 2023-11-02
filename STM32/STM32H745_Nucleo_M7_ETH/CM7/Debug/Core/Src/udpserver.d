@@ -59,7 +59,7 @@ Core/Src/udpserver.o: ../Core/Src/udpserver.c \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Inc/udpserver.h ../Core/Inc/Modbus.h
+ ../Core/Inc/udpserver.h ../Core/Inc/Modbus.h ../Core/Inc/Modbus_UDP.h
 ../../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h:
 ../LWIP/Target/lwipopts.h:
 ../Core/Inc/main.h:
@@ -123,3 +123,4 @@ Core/Src/udpserver.o: ../Core/Src/udpserver.c \
 ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../Core/Inc/udpserver.h:
 ../Core/Inc/Modbus.h:
+../Core/Inc/Modbus_UDP.h:

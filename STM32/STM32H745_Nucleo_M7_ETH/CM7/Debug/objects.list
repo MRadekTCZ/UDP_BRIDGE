@@ -1,5 +1,6 @@
 "./Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.o"
 "./Core/Src/Modbus.o"
+"./Core/Src/Modbus_UDP.o"
 "./Core/Src/freertos.o"
 "./Core/Src/gpio.o"
 "./Core/Src/lwiperf.o"

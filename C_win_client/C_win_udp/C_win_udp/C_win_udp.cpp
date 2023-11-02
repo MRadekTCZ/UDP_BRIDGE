@@ -14,7 +14,7 @@
 
 
 
-// Funkcja obsługująca odbieranie odpowiedzi od serwera w osobnym wątku
+
 void ReceiveThread(SOCKET clientSocket) {
 
     Modbus_answer response1{};
@@ -29,11 +29,13 @@ void ReceiveThread(SOCKET clientSocket) {
         if (bytesReceived > 0) {
             buffer[bytesReceived] = '\0';
             int data_inkrement = 0;
+            //Writing exact bytes to modbus struct
             response1.address = buffer[0];
             response1.function = buffer[1];
             response1.data_count = buffer[2];
             if(response1.data_count != 0)
             {
+                //for loop depends on amount of data incoming
                 for (data_inkrement = 0; data_inkrement < response1.data_count; data_inkrement++)
                 {
                     response1.data[data_inkrement].data_t[1] = buffer[data_inkrement*2 + 3];
@@ -131,7 +133,7 @@ int main() {
         return 1;
     }
 
-    // Uruchom wątek do obsługi odbierania odpowiedzi od serwera
+    // Thread for server reading
     std::thread receiveThread(ReceiveThread, clientSocket);
 
     while (true) {
@@ -144,8 +146,11 @@ int main() {
         std::cout << "Register offset reading start";
         std::string message;
         std::cin >> message;
+        // get register offset
         unsigned short int reg_cin;
         reg_cin = std::stoi(message);
+
+        //Writing exact bytes to modbus struct
         Ask1.offset.data_u = reg_cin;
         char data_heap_crc[6] = { Ask1.address, Ask1.function,
         Ask1.offset.data_t[1],Ask1.offset.data_t[0], Ask1.reg_count.data_t[1],Ask1.reg_count.data_t[0] };
@@ -160,17 +165,18 @@ int main() {
             break;
         }
         std::string Modbus_frame = "";
+        // puting every byte in one string (UDP function requires string argument)
         Modbus_frame = Modbus_frame + Ask1.address + Ask1.function +
             Ask1.offset.data_t[1] + Ask1.offset.data_t[0] + 
             Ask1.reg_count.data_t[1] + Ask1.reg_count.data_t[0] + 
             Ask1.crc.data_t[1]+ Ask1.crc.data_t[0];
 
         for (char c : Modbus_frame) {
-            // Podziel char na dwie wartości heksadecymalne
+            // divide char to 2 x HEX
             unsigned char firstNibble = (c >> 4) & 0x0F;
             unsigned char secondNibble = c & 0x0F;
 
-            // Wyświetl znaki heksadecymalne w konsoli
+            // Hex in console
             std::cout << std::hex << std::setw(1) << static_cast<unsigned int>(firstNibble) ;
             std::cout << std::hex << std::setw(1) << static_cast<unsigned int>(secondNibble);
         }
@@ -183,7 +189,7 @@ int main() {
         std::this_thread::sleep_for(std::chrono::seconds(1)); // Odczekaj 1 sekundę przed kolejnym wprowadzeniem wiadomości
     }
 
-    // Dołącz wątek obsługi odbierania odpowiedzi
+    // Thread for receiving responses from server
     receiveThread.join();
 
     closesocket(clientSocket);
