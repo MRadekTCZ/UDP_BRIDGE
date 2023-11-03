@@ -8,9 +8,9 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-#define CLIENT_PORT 11723
-#define SERVER_PORT 14077
-#define SERVER_IP "192.168.3.247"
+#define CLIENT_PORT 777
+#define SERVER_PORT 7
+#define SERVER_IP "192.168.100.201"
 
 
 

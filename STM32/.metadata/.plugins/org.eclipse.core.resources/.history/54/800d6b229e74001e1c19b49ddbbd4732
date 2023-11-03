@@ -1,2 +1,0 @@
-
-void updateCurrentTime(struct Time *currentTime, unsigned int milliseconds);

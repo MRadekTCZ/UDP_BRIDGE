@@ -1,8 +1,0 @@
-struct Time
-{
-	unsigned int hours;
-	unsigned int minutes;
-	unsigned int seconds;
-	unsigned int miliSeconds;
-};
-void updateCurrentTime(struct Time *currentTime, unsigned int milliseconds);

@@ -20,8 +20,8 @@ static ip_addr_t *addr;
 static unsigned short port;
 char msg[100];
 char smsg[200];
-unsigned short int reg_mdb[20];
-union Data reg_mdb_word[20];
+unsigned short int reg_mdb[50];
+union Data reg_mdb_word[50];
 unsigned short int setter[5] = {250,1,12,30,10};
 
 /*-----------------------------------------------------------------------------------*/
@@ -47,7 +47,7 @@ static void udp_thread(void *arg)
 			{
 				/* Receive the data from the connection */
 				recv_err = netconn_recv(conn, &buf);
-				for(int reg = 0; reg<20;reg++)
+				for(int reg = 0; reg<50;reg++)
 				{
 					reg_mdb_word[reg].data_u = reg_mdb[reg];
 				}
@@ -55,6 +55,8 @@ static void udp_thread(void *arg)
 
 				if (recv_err == ERR_OK) // if the data is received
 				{
+
+					//Rembember - there cannot be null bytes in send message (from client)
 					addr = netbuf_fromaddr(buf);  // get the address of the client
 					port = netbuf_fromport(buf);  // get the Port of the client
 					strcpy (msg, buf->p->payload);
@@ -66,30 +68,33 @@ static void udp_thread(void *arg)
 					Ask1.function = msg[1];
 					Ask1.offset.data_t[0] = msg[2];
 					Ask1.offset.data_t[1] = msg[3];
-					Ask1.reg_count.data_t[0] = msg[4];
+					//Ask1.offset.data_u = msg[3];
+					Ask1.reg_count.data_t[0] = msg[4];  // Is optional - possible removal
 					Ask1.reg_count.data_t[1] = msg[5];
 					Ask1.crc.data_t[0] = msg[6];
-					Ask1.crc.data_t[0] = msg[7];
+					Ask1.crc.data_t[1] = msg[7];
 					Response1.address = msg[0];
 					Response1.function = msg[1];
-					Response1.data_count = 1;
+					Response1.data_count = msg[5];
 					int data_inkrement = 0;
 					if (Ask1.address == 0x01 && Ask1.function == 0x03)
 					{
 
 						for (data_inkrement = 0; data_inkrement < Response1.data_count; data_inkrement++)
 							{
-								Response1.data[data_inkrement].data_t[1] = reg_mdb_word->data_t[1+ Ask1.offset.data_u];
-								Response1.data[data_inkrement].data_t[0] = reg_mdb_word->data_t[0+ Ask1.offset.data_u];
-								smsg[3+data_inkrement] = Response1.data[data_inkrement].data_t[1];
-								smsg[4+data_inkrement] = Response1.data[data_inkrement].data_t[0];
+								Response1.data[data_inkrement].data_t[1] = reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[1];
+								Response1.data[data_inkrement].data_t[0] = reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[0];
+								smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
+								smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
+								//smsg[3+data_inkrement*2] = 0x12;
+								//smsg[4+data_inkrement*2] = 0xA0;
 							}
 						smsg[0] = Response1.address;
 						smsg[1] = Response1.function;
 						smsg[2] = Response1.data_count;
-						smsg[5+data_inkrement] = 0xBA; //CRC1
-						smsg[6+data_inkrement] = 0xAB; //CRC2
-						len = 7+data_inkrement;
+						smsg[5+(data_inkrement*2)-2] = 0xBA; //CRC1
+						smsg[6+(data_inkrement*2)-2] = 0xAB; //CRC2
+						len = 5+(data_inkrement*2);
 						/*
 						switch(msg[1]){
 						case 0:

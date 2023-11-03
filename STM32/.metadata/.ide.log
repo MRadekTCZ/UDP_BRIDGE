@@ -9021,3 +9021,10 @@
 2023-11-02 22:52:56,380 [WARN] IP:2111 - IsShareable_S not found: check if there is a RefParameter without a condition.
 2023-11-02 22:52:56,380 [WARN] IP:2111 - IsCacheable_S not found: check if there is a RefParameter without a condition.
 2023-11-02 22:52:56,380 [WARN] IP:2111 - IsBufferable_S not found: check if there is a RefParameter without a condition.
+2023-11-03 10:22:46,738 [INFO] Activator:177 - 
+
+
+2023-11-03 10:22:46,739 [INFO] Activator:178 - !SESSION log4j initialized
+2023-11-03 10:23:21,787 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2023-11-03 10:23:21,787 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2023-11-03 10:23:21,789 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
