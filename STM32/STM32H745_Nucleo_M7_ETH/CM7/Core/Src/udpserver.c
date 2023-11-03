@@ -38,7 +38,7 @@ static void udp_thread(void *arg)
 	if (conn!= NULL)
 	{
 		/* Bind connection to the port 7 */
-		err = netconn_bind(conn, IP_ADDR_ANY, 7);
+		err = netconn_bind(conn, IP_ADDR_ANY, 777);
 
 		if (err == ERR_OK)
 		{
@@ -66,34 +66,63 @@ static void udp_thread(void *arg)
 					//Writing exact bytes to modbus struct
 					Ask1.address = msg[0];
 					Ask1.function = msg[1];
-					Ask1.offset.data_t[0] = msg[2];
-					Ask1.offset.data_t[1] = msg[3];
+					Ask1.offset.data_t[0] = msg[3]-1;
+					//Ask1.offset.data_t[1] = 0;
 					//Ask1.offset.data_u = msg[3];
-					Ask1.reg_count.data_t[0] = msg[4];  // Is optional - possible removal
-					Ask1.reg_count.data_t[1] = msg[5];
-					Ask1.crc.data_t[0] = msg[6];
-					Ask1.crc.data_t[1] = msg[7];
+					Ask1.reg_count = msg[4];
+					//Ask1.crc.data_t[0] = msg[6];
+					//Ask1.crc.data_t[1] = msg[5];
+
+					char data_heap_crc[5] = { Ask1.address, Ask1.function,
+					0xFF,Ask1.offset.data_t[0]+1, Ask1.reg_count };
+					int length_crc = sizeof(data_heap_crc);
+					Ask1.crc.data_u = CRC_check(data_heap_crc, length_crc, CRCTable);
+
 					Response1.address = msg[0];
 					Response1.function = msg[1];
-					Response1.data_count = msg[5];
+					Response1.data_count = msg[4];
 					int data_inkrement = 0;
+
 					if (Ask1.address == 0x01 && Ask1.function == 0x03)
 					{
 
 						for (data_inkrement = 0; data_inkrement < Response1.data_count; data_inkrement++)
 							{
-								Response1.data[data_inkrement].data_t[1] = reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[1];
-								Response1.data[data_inkrement].data_t[0] = reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[0];
-								smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
-								smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
-								//smsg[3+data_inkrement*2] = 0x12;
-								//smsg[4+data_inkrement*2] = 0xA0;
+								//Response1.data[data_inkrement].data_t[1] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[1];
+								//Response1.data[data_inkrement].data_t[0] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[0];
+								//smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
+								//smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
+								//Tu poszukac bledu zlego nadpisania danych
+								smsg[3+data_inkrement*2] = reg_mdb[10];
+								smsg[4+data_inkrement*2] = reg_mdb[14];
 							}
 						smsg[0] = Response1.address;
 						smsg[1] = Response1.function;
 						smsg[2] = Response1.data_count;
+						if(Ask1.crc.data_t[1] == msg[5] && Ask1.crc.data_t[0] == msg[6])
+						{
+							char data_heap_crc_res[Response1.data_count*2 + 3];
+							data_heap_crc_res[0] = Response1.address;
+							data_heap_crc_res[1] = Response1.function;
+							data_heap_crc_res[2] = Response1.data_count;
+							int reg_res;
+								for(reg_res = 0; reg_res<Response1.data_count*2;reg_res++)
+								{
+									data_heap_crc_res[reg_res+3] = smsg[reg_res+3];
+								}
+							int length_crc_res = sizeof(data_heap_crc_res);
+							Response1.crc.data_u = CRC_check(data_heap_crc_res, length_crc_res, CRCTable);
+							//Response1.crc.data_u = 0x10FA;
+							smsg[5+reg_res-2] = Response1.crc.data_t[1];
+							smsg[6+reg_res-2] = Response1.crc.data_t[0];
+							//smsg[5+(data_inkrement*2)-2] = 0xDD;
+							//smsg[6+(data_inkrement*2)-2] = 0xFF;
+						}
+						else
+						{
 						smsg[5+(data_inkrement*2)-2] = 0xBA; //CRC1
 						smsg[6+(data_inkrement*2)-2] = 0xAB; //CRC2
+						}
 						len = 5+(data_inkrement*2);
 						/*
 						switch(msg[1]){
@@ -175,8 +204,13 @@ static void udp_thread(void *arg)
 		else
 		{
 			netconn_delete(conn);
+
 		}
+
+
 	}
+
+
 }
 
 

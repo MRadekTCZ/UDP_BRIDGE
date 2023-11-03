@@ -25,7 +25,7 @@ struct Modbus_ask
 	char function;
 	union Data crc;
 	union Data offset;
-	union Data reg_count;
+	char reg_count;
 };
 struct Modbus_answer
 {

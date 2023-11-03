@@ -337,7 +337,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   if (htim->Instance == TIM14) {
 
-	  sin_current = (unsigned int)round(20000*sin(elapsedTime*0.1*50*3.14)+20000);
+	  sin_current = (unsigned short int)round(20000*sin(elapsedTime*0.1*50*3.14)+20000);
 	  Modbus_reg1.sin_current = sin_current;
 	  reg_mdb[15] = Modbus_reg1.sin_current;
 

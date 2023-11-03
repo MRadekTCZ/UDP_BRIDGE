@@ -1,17 +1,17 @@
 struct Time
 {
-	unsigned int hours;
-	unsigned int minutes;
-	unsigned int seconds;
-	unsigned int miliSeconds;
+	unsigned short int hours;
+	unsigned short int minutes;
+	unsigned short int seconds;
+	unsigned short int miliSeconds;
 };
 
 
 struct Modbus_reg
 {
-	unsigned int setvoltage;
-	unsigned int sin_current;
-	unsigned int counter_bt1;
+	unsigned short int setvoltage;
+	unsigned short int sin_current;
+	unsigned short int counter_bt1;
 	struct Time currentTime_modbus;
 };
-void updateCurrentTime(struct Time *currentTime, unsigned int milliseconds);
+void updateCurrentTime(struct Time *currentTime, unsigned short int milliseconds);

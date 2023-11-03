@@ -17,7 +17,7 @@ struct Modbus
 struct Modbus_ask : Modbus
 {
 	union Data offset;
-	union Data reg_count;
+	char reg_count;
 };
 struct Modbus_answer : Modbus
 {

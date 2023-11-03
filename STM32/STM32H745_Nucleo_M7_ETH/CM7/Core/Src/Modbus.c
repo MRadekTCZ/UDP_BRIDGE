@@ -1,5 +1,5 @@
 #include "Modbus.h"
-void updateCurrentTime(struct Time *currentTime, unsigned int milliseconds)
+void updateCurrentTime(struct Time *currentTime, unsigned short int milliseconds)
 {
     currentTime->miliSeconds += milliseconds;
 
