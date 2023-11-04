@@ -73,10 +73,7 @@ static void udp_thread(void *arg)
 					//Ask1.crc.data_t[0] = msg[6];
 					//Ask1.crc.data_t[1] = msg[5];
 
-					char data_heap_crc[5] = { Ask1.address, Ask1.function,
-					0xFF,Ask1.offset.data_t[0]+1, Ask1.reg_count };
-					int length_crc = sizeof(data_heap_crc);
-					Ask1.crc.data_u = CRC_check(data_heap_crc, length_crc, CRCTable);
+
 
 					Response1.address = msg[0];
 					Response1.function = msg[1];
@@ -86,6 +83,10 @@ static void udp_thread(void *arg)
 					if (Ask1.address == 0x01 && Ask1.function == 0x03)
 					{
 
+						char data_heap_crc[5] = { Ask1.address, Ask1.function,
+											0xFF,Ask1.offset.data_t[0]+1, Ask1.reg_count };
+											int length_crc = sizeof(data_heap_crc);
+											Ask1.crc.data_u = CRC_check(data_heap_crc, length_crc, CRCTable);
 						for (data_inkrement = 0; data_inkrement < Response1.data_count; data_inkrement++)
 							{
 								//Response1.data[data_inkrement].data_t[1] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[1];
@@ -126,56 +127,15 @@ static void udp_thread(void *arg)
 						smsg[6+(data_inkrement*2)-2] = 0xAB; //CRC2
 						}
 						len = 5+(data_inkrement*2);
-						/*
-						switch(msg[1]){
-						case 0:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 0\n", reg_mdb[0]);
-							break;
-						case 1:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 1\n", reg_mdb[1]);
-							break;
-						case 2:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 2\n", reg_mdb[2]);
-							break;
-						case 3:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 3\n", reg_mdb[3]);
-							break;
-						case 4:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 4\n", reg_mdb[4]);
-							break;
-						case 5:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 5\n", reg_mdb[5]);
-							break;
-						case 6:
-							len = sprintf (smsg, "\"%i\" Odpowiedz klienta - rejestr 6\n", reg_mdb[6]);
-							break;
-						}*/
 					}
-						else if (msg[0] == 0x0E)
+						else if (Ask1.address == 0x01 && Ask1.function == 0x06)
 						{
-							switch(msg[1]){
-							case 0:
-								reg_mdb[0] = msg[2];
-								len = sprintf (smsg, " Ustawiono milisekundy na \"%i\" \n", reg_mdb[0]);
-								break;
-							case 1:
-								reg_mdb[1] = msg[2];
-								len = sprintf (smsg, " Ustawiono sekundy na \"%i\" \n", reg_mdb[1]);
-								break;
-							case 2:
-								reg_mdb[2] = msg[2];
-								len = sprintf (smsg, " Ustawiono minuty na \"%i\" \n", reg_mdb[2]);
-								break;
-							case 3:
-								reg_mdb[3] = msg[2];
-								len = sprintf (smsg, " Ustawiono godziny na \"%i\" \n", reg_mdb[3]);
-								break;
+							char data_heap_crc[5] = { Ask1.address, Ask1.function,
+													msg[2], msg[3], Ask1.reg_count };
+													int length_crc = sizeof(data_heap_crc);
+													Ask1.crc.data_u = CRC_check(data_heap_crc, length_crc, CRCTable);
+							reg_mdb[Response1.data_count] = (msg[2]<<8) + msg[3] ;
 
-							case 6:
-								setter[0] = msg[2]*256 + msg[3];
-								len = sprintf (smsg, " Ustawiono napiecie na \"%i\" \n", setter[0]);
-								break;
-							}
 						}
 
 					else

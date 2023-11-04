@@ -158,20 +158,39 @@ int main() {
         //std::cout << "Amount of register to read";
         unsigned short int reg_count_read;
         reg_count_read = 1;
-        
-        std::cout << "Number of register to read:";
-        std::cin >> reg_count_read;
-        Ask1.reg_count = reg_count_read;
-        std::cout << "Register offset reading start:";
-        std::string message;
-        std::cin >> message;
-        // get register offset
+        unsigned short int function;
+        std::cout << "Reading(3) or setting registers(6)?:";
+        std::cin >> function;
+        Ask1.function = function;
         unsigned short int reg_cin;
-        reg_cin = std::stoi(message);
+        std::string message;
+        if (Ask1.function == 3)
+        {
+            std::cout << "Number of register to read:";
+            std::cin >> reg_count_read;
+            Ask1.reg_count = reg_count_read;
+            std::cout << "Register offset reading start:";           
+            std::cin >> message;
+            // get register offset          
+            reg_cin = std::stoi(message);
+            Ask1.offset.data_t[1] = 0xFF;
+            Ask1.offset.data_t[0] = reg_cin;
+        }
+        else if (Ask1.function == 6)
+        {
+            std::cout << "Register to write:";
+            std::cin >> reg_count_read;
+            Ask1.reg_count = reg_count_read;
+            std::cout << "Data to write to this register:";
+            std::cin >> message;
+            // get register offset          
+            reg_cin = std::stoi(message);
+            Ask1.offset.data_t[1] = 0xF0;
+            Ask1.offset.data_t[0] = reg_cin;
+        }
 
         //Writing exact bytes to modbus struct
-        Ask1.offset.data_t[1] = 0xFF;
-        Ask1.offset.data_t[0] = reg_cin;
+
         char data_heap_crc[5] = { Ask1.address, Ask1.function,
         Ask1.offset.data_t[1],Ask1.offset.data_t[0], Ask1.reg_count };
         int length_crc = sizeof(data_heap_crc);
@@ -179,11 +198,12 @@ int main() {
         
         
 
-
+        
         reg_cin = std::stoi(message);
         if (message == "q") {
             break;
         }
+        
         std::string Modbus_frame = "";
         // puting every byte in one string (UDP function requires string argument)
         Modbus_frame = Modbus_frame + Ask1.address + Ask1.function +
