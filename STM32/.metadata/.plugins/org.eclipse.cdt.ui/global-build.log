@@ -8450,3 +8450,123 @@ Finished building: default.size.stdout
  
 Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
  
+08:47:48 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219799	 342647	  53a77	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:04:42 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121636	   1196	 219799	 342631	  53a67	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:07:39 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121620	   1196	 219799	 342615	  53a57	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:12:54 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219799	 342647	  53a77	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:15:37 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219799	 342647	  53a77	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:18:41 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219679	 342527	  539ff	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:21:26 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219679	 342527	  539ff	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+10:23:21 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219679	 342527	  539ff	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 
+10:26:09 **** Incremental Build of configuration Debug for project STM32H745_Nucleo_M7_ETH_CM7 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/udpserver.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../LWIP/App -I../LWIP/Target -I../../Middlewares/Third_Party/LwIP/src/include -I../../Middlewares/Third_Party/LwIP/system -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/BSP/Components/lan8742 -I../../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../Middlewares/Third_Party/LwIP/src/include/lwip -I../../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../Middlewares/Third_Party/LwIP/src/include/netif -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../Middlewares/Third_Party/LwIP/system/arch -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/udpserver.d" -MT"Core/Src/udpserver.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/udpserver.o"
+arm-none-eabi-gcc -o "STM32H745_Nucleo_M7_ETH_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\STM32\STM32H745_Nucleo_M7_ETH\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32H745_Nucleo_M7_ETH_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32H745_Nucleo_M7_ETH_CM7.elf
+ 
+arm-none-eabi-size   STM32H745_Nucleo_M7_ETH_CM7.elf 
+arm-none-eabi-objdump -h -S  STM32H745_Nucleo_M7_ETH_CM7.elf  > "STM32H745_Nucleo_M7_ETH_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+ 121652	   1196	 219679	 342527	  539ff	STM32H745_Nucleo_M7_ETH_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32H745_Nucleo_M7_ETH_CM7.list
+ 

@@ -79,7 +79,7 @@ unsigned short int elapsedTime;
 
 extern char smsg[200];
 extern char msg[100];
-extern unsigned short int reg_mdb[50];
+extern unsigned short int reg_mdb[20];
 
 extern unsigned short int setter[5];
 

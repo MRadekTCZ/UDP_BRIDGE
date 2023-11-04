@@ -8,6 +8,15 @@ unsigned short int CRC(char* data, int length, unsigned int crcTable[256])
     return crc;
 }
 
+unsigned short int CRC_vector(const char* data, int length, unsigned int crcTable[256])
+{
+    unsigned int crc = 0xFFFF;
+    for (int i = 0; i < length; i++) {
+        crc = (crc << 8) ^ crcTable[((crc >> 8) ^ data[i]) & 0xFF];
+    }
+    return crc;
+}
+
 void ModbusInit(unsigned int Table[256]) {
     const unsigned int polynomial = 0x1001; // CRC-16 polinom A001
 

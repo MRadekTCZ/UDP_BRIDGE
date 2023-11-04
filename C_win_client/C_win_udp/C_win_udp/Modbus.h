@@ -28,6 +28,7 @@ struct Modbus_answer : Modbus
 
 unsigned short int CRC(char* data, int length, unsigned int crcTable[256]);
 void ModbusInit(unsigned int crcTable[256]);
+unsigned short int CRC_vector(const char* data, int length, unsigned int crcTable[256]);
 
 unsigned int CRCTable[256] = {
 0x0000,0xc0c1, 0xc181, 0x0140, 0xc301, 0x03c0, 0x0280, 0xc241,

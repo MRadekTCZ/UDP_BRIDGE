@@ -20,8 +20,8 @@ static ip_addr_t *addr;
 static unsigned short port;
 char msg[100];
 char smsg[200];
-unsigned short int reg_mdb[50];
-union Data reg_mdb_word[50];
+unsigned short int reg_mdb[20];
+union Data reg_mdb_word[20];
 unsigned short int setter[5] = {250,1,12,30,10};
 
 /*-----------------------------------------------------------------------------------*/
@@ -47,7 +47,7 @@ static void udp_thread(void *arg)
 			{
 				/* Receive the data from the connection */
 				recv_err = netconn_recv(conn, &buf);
-				for(int reg = 0; reg<50;reg++)
+				for(int reg = 0; reg<20;reg++)
 				{
 					reg_mdb_word[reg].data_u = reg_mdb[reg];
 				}
@@ -90,11 +90,13 @@ static void udp_thread(void *arg)
 							{
 								//Response1.data[data_inkrement].data_t[1] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[1];
 								//Response1.data[data_inkrement].data_t[0] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[0];
+								Response1.data[data_inkrement].data_t[1] = (char)reg_mdb[Ask1.offset.data_t[0]+data_inkrement];
+								Response1.data[data_inkrement].data_t[0] = (char)(reg_mdb[Ask1.offset.data_t[0]+data_inkrement]>>8);
 								//smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
 								//smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
 								//Tu poszukac bledu zlego nadpisania danych
-								smsg[3+data_inkrement*2] = reg_mdb[10];
-								smsg[4+data_inkrement*2] = reg_mdb[14];
+								smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
+								smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
 							}
 						smsg[0] = Response1.address;
 						smsg[1] = Response1.function;

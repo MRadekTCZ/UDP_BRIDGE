@@ -5,6 +5,7 @@
 #include <string>
 #include "Modbus.h"
 #include <iomanip> 
+#include <vector>
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -41,29 +42,38 @@ void ReceiveThread(SOCKET clientSocket) {
                     response1.data[data_inkrement].data_t[1] = buffer[data_inkrement*2 + 3];
                     response1.data[data_inkrement].data_t[0] = buffer[data_inkrement*2 + 4];
                 }
+                //response1.crc.data_u = CRC_vector(data_count_ptr, length_crc_res, CRCTable);            
                 response1.crc.data_t[0] = buffer[data_inkrement*2 + 3];
                 response1.crc.data_t[1] = buffer[data_inkrement*2 + 4];
-                //response1.crc.data_t[0] = 0x11;
-                //response1.crc.data_t[1] = 0x22;
-                //Uzaleznic dlugosc odczytywane wektora data od zapytania (ilosc rejestrow) 
-                //Tutaj dopisac funkcje CRC check - jezeli CRC sie nie zgadza to zwraca blad
-                char crc_resp_comp_data[] = { response1.address + response1.function +
-                    response1.data[0].data_t[1] + response1.data[0].data_t[0] };
-                int length_crc_comp = sizeof(crc_resp_comp_data);
-
-                unsigned int response_i = response1.data[0].data_t[1] + response1.data[0].data_t[0];
-
-                unsigned short int crc_response_comparison = CRC(crc_resp_comp_data, length_crc_comp, CRCTable);
+                
+                //New array for independent checking CRC sum
+                std::vector<char> data_heap_crc_res(response1.data_count * 2 + 3);
+                data_heap_crc_res[0] = response1.address;
+                data_heap_crc_res[1] = response1.function;
+                data_heap_crc_res[2] = response1.data_count;
+                int reg_res;
+                for (reg_res = 0; reg_res < response1.data_count * 2; reg_res++)
+                {
+                    data_heap_crc_res[reg_res + 3] = buffer[reg_res + 3];
+                }
+                const char* data_count_ptr = data_heap_crc_res.data();
+                int length_crc_res = sizeof(response1.data_count * 2 + 3);
+                
+                //Comparison of received  and counted CRC
+                unsigned short int crc_response_comparison = CRC_vector(data_heap_crc_res.data(), length_crc_res, CRCTable);
                 bool b_crc_response_comparison = (crc_response_comparison == response1.crc.data_u) ? true : false;
-                //chwilowy dodatek - bez sprawdzania crc, bool zawsze true
+                
                 b_crc_response_comparison = true;
                 if (b_crc_response_comparison)
                 {
                     for (data_inkrement = 0; data_inkrement < response1.data_count; data_inkrement++)
                     {
+                        std::cout << std::dec;
                         std::cout << "Response: " << response1.data[data_inkrement].data_u << std::endl;
                     }
+                    std::cout << std::hex;
                     std::cout << "CRC: " << response1.crc.data_u << std::endl;
+                    //std::cout << "CRC: " << crc_response_comparison << std::endl;
                     
                 }
                 else
@@ -85,10 +95,15 @@ void ReceiveThread(SOCKET clientSocket) {
 }
 
 int main() {
-    char c = 136;
-    std::cout << c << "\n";
+    //char c = 136;
+    
+    //std::cout << c << "\n";
     //unsigned int CRCTable[256];
     //ModbusInit(CRCTable);
+    for (int i = 0; i < 10; i++)
+    {
+        std::cout << 1 + i * 11 + i * i * 7 + i * i * 3;
+    }
     Modbus_ask Ask1{};
     Ask1.address = 0x01;
     Ask1.function = 0x03;
@@ -114,10 +129,10 @@ int main() {
 
     sockaddr_in clientAddr;
     clientAddr.sin_family = AF_INET;
-    clientAddr.sin_port = htons(CLIENT_PORT); // Wybierz dowolny numer portu klienta
+    clientAddr.sin_port = htons(CLIENT_PORT); 
     clientAddr.sin_addr.s_addr = INADDR_ANY;
 
-    // Przypisz numer portu do gniazda klienta
+    // Port number and socket
     if (bind(clientSocket, (struct sockaddr*)&clientAddr, sizeof(clientAddr)) == SOCKET_ERROR) {
         std::cerr << "Error in client port" << std::endl;
         closesocket(clientSocket);
@@ -127,7 +142,7 @@ int main() {
 
     sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(SERVER_PORT); // Numer portu serwera
+    serverAddr.sin_port = htons(SERVER_PORT); 
     if (inet_pton(AF_INET, SERVER_IP, &(serverAddr.sin_addr)) <= 0) {
         std::cerr << "Error IP." << std::endl;
         closesocket(clientSocket);
@@ -191,7 +206,7 @@ int main() {
             std::cerr << "Error while sending the data: " << WSAGetLastError() << std::endl;
         }
 
-        std::this_thread::sleep_for(std::chrono::seconds(1)); // Odczekaj 1 sekundę przed kolejnym wprowadzeniem wiadomości
+        std::this_thread::sleep_for(std::chrono::seconds(1)); // 
     }
 
     // Thread for receiving responses from server
