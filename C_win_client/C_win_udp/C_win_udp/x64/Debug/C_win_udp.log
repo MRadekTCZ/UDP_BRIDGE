@@ -1,8 +1,8 @@
 ﻿  C_win_udp.cpp
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(171,25): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(178,30): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(183,37): warning C4309: "=": obcięcie stałej wartości
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(184,37): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(190,30): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
-C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(232,87): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(173,25): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
+C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(180,30): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
+C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(185,37): warning C4309: "=": obcięcie stałej wartości
+C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(186,37): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
+C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(192,30): warning C4244: "=": konwersja z "unsigned short" do "char", możliwa utrata danych
+C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\C_win_udp\C_win_udp.cpp(235,87): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
   C_win_udp.vcxproj -> C:\Users\Maciek\Desktop\Rozwoj\UDP_BRIDGE\UDP_BRIDGE\UDP_BRIDGE\C_win_client\C_win_udp\x64\Debug\C_win_udp.exe
