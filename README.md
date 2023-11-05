@@ -1,2 +1,2 @@
 # UDP_BRIDGE
-In progress - bridge that connects Windows PC, Linux PC and STM32 via UDP. In the future via Modbus UDP
+Bridge that connects Windows PC, Linux PC, Raspberry pi and STM32 via Modbus UDP. 
