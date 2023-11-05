@@ -1,3 +1,5 @@
+/****************************/
+//Code implementation for Linux ubuntu or Raspbian (Raspberry pi 3)
 /////////////
 #include <unistd.h>
 #include <iostream>
