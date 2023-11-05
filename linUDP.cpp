@@ -13,7 +13,7 @@
 
 
 
-// Funkcja obsługująca odbieranie odpowiedzi od serwera w osobnym wątku
+// Another thread for receiving data via udp
 void ReceiveThread(int clientSocket) {
     char buffer[1024];
     sockaddr_in serverAddr;
@@ -42,10 +42,10 @@ int main() {
 
     sockaddr_in clientAddr;
     clientAddr.sin_family = AF_INET;
-    clientAddr.sin_port = htons(CLIENT_PORT); // Wybierz numer portu 1777
+    clientAddr.sin_port = htons(CLIENT_PORT); 
     clientAddr.sin_addr.s_addr = INADDR_ANY;
 
-    // Przypisz numer portu do gniazda klienta
+    // Binding socket with port number
     if (bind(clientSocket, (struct sockaddr*)&clientAddr, sizeof(clientAddr)) == -1) {
         std::cerr << "Port error." << std::endl;
         close(clientSocket);
@@ -54,14 +54,14 @@ int main() {
 
     sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(SERVER_PORT); // Numer portu serwera
+    serverAddr.sin_port = htons(SERVER_PORT);
     if (inet_pton(AF_INET, SERVER_IP, &(serverAddr.sin_addr)) <= 0) {
         std::cerr << "IP error" << std::endl;
         close(clientSocket);
         return 1;
     }
 
-    // Uruchom wątek do obsługi odbierania odpowiedzi od serwera
+    // Thread with receving data from server - start
     std::thread receiveThread(ReceiveThread, clientSocket);
 
     while (true) {
@@ -78,10 +78,9 @@ int main() {
             std::cerr << "Error sending data." << std::endl;
         }
 
-        std::this_thread::sleep_for(std::chrono::seconds(1)); // Odczekaj 1 sekundę przed kolejnym wprowadzeniem wiadomości
-    }
+        std::this_thread::sleep_for(std::chrono::seconds(1)); //1 sec delay between asking
 
-    // Dołącz wątek obsługi odbierania odpowiedzi
+    
     receiveThread.join();
 
     close(clientSocket);

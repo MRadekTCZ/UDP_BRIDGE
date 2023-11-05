@@ -69,7 +69,14 @@ void ReceiveThread(SOCKET clientSocket) {
                     for (data_inkrement = 0; data_inkrement < response1.data_count; data_inkrement++)
                     {
                         std::cout << std::dec;
-                        std::cout << "Response: " << response1.data[data_inkrement].data_u << std::endl;
+                        // If response for reg setting 
+                        if (response1.function == 0x06)
+                        {
+                            std::cout << "Data set in reg " << response1.data_count << " : " << response1.data[data_inkrement].data_u << std::endl;
+                        }
+                        //If response for reg asking
+                        else { std::cout << "Response " << data_inkrement + 1 << " : " << response1.data[data_inkrement].data_u << std::endl; }
+                        
                     }
                     std::cout << std::hex;
                     std::cout << "CRC: " << response1.crc.data_u << std::endl;
@@ -100,10 +107,12 @@ int main() {
     //std::cout << c << "\n";
     //unsigned int CRCTable[256];
     //ModbusInit(CRCTable);
+    /*
     for (int i = 0; i < 10; i++)
     {
         std::cout << 1 + i * 11 + i * i * 7 + i * i * 3;
     }
+    */
     Modbus_ask Ask1{};
     Ask1.address = 0x01;
     Ask1.function = 0x03;
@@ -183,10 +192,11 @@ int main() {
             Ask1.reg_count = reg_count_read;
             std::cout << "Data to write to this register:";
             std::cin >> message;
-            // get register offset          
+            // get register number to set        
             reg_cin = std::stoi(message);
-            Ask1.offset.data_t[1] = 0xF0;
-            Ask1.offset.data_t[0] = reg_cin;
+            // Bytes are negated because 0 cannot be send (Server is stoping receiving then). U2 coding - negation + 1 on server side
+            Ask1.offset.data_t[1] = ~(reg_cin >> 8);
+            Ask1.offset.data_t[0] = ~reg_cin;
         }
 
         //Writing exact bytes to modbus struct
@@ -210,7 +220,7 @@ int main() {
             Ask1.offset.data_t[1] + Ask1.offset.data_t[0] + 
             Ask1.reg_count + 
             Ask1.crc.data_t[1]+ Ask1.crc.data_t[0];
-
+        
         for (char c : Modbus_frame) {
             // divide char to 2 x HEX
             unsigned char firstNibble = (c >> 4) & 0x0F;
@@ -220,6 +230,7 @@ int main() {
             std::cout << std::hex << std::setw(1) << static_cast<unsigned int>(firstNibble) ;
             std::cout << std::hex << std::setw(1) << static_cast<unsigned int>(secondNibble);
         }
+        
         std::cout << "\n";
         int bytesSent = sendto(clientSocket, Modbus_frame.c_str(), Modbus_frame.length(), 0, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
         if (bytesSent == SOCKET_ERROR) {

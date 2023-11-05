@@ -93,6 +93,9 @@ extern unsigned short int setter[5];
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	/********************************************************************/
+	// MAIN PROGRAM IN udpserver.c - function is called every cycle in RTOS
+	/********************************************************************/
 for (int i = 0; i< 10 ; i++)
 {
 	reg_mdb[i] = 1+i*11+i*i*7+i*i*3;

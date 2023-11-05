@@ -60,7 +60,7 @@ static void udp_thread(void *arg)
 					addr = netbuf_fromaddr(buf);  // get the address of the client
 					port = netbuf_fromport(buf);  // get the Port of the client
 					strcpy (msg, buf->p->payload);
-					int len;  // get the message from the client
+					int len;  // length of the message from the client
 					struct Modbus_ask Ask1;
 					struct Modbus_answer Response1;
 					//Writing exact bytes to modbus struct
@@ -74,12 +74,13 @@ static void udp_thread(void *arg)
 					//Ask1.crc.data_t[1] = msg[5];
 
 
-
+					//Response struct
 					Response1.address = msg[0];
 					Response1.function = msg[1];
 					Response1.data_count = msg[4];
 					int data_inkrement = 0;
 
+					// If modbus function is 3 (reading multiple registers)
 					if (Ask1.address == 0x01 && Ask1.function == 0x03)
 					{
 
@@ -87,21 +88,19 @@ static void udp_thread(void *arg)
 											0xFF,Ask1.offset.data_t[0]+1, Ask1.reg_count };
 											int length_crc = sizeof(data_heap_crc);
 											Ask1.crc.data_u = CRC_check(data_heap_crc, length_crc, CRCTable);
+						//for loop to write data to various table lenght
 						for (data_inkrement = 0; data_inkrement < Response1.data_count; data_inkrement++)
 							{
-								//Response1.data[data_inkrement].data_t[1] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[1];
-								//Response1.data[data_inkrement].data_t[0] = (char)reg_mdb_word[Ask1.offset.data_u+data_inkrement].data_t[0];
 								Response1.data[data_inkrement].data_t[1] = (char)reg_mdb[Ask1.offset.data_t[0]+data_inkrement];
 								Response1.data[data_inkrement].data_t[0] = (char)(reg_mdb[Ask1.offset.data_t[0]+data_inkrement]>>8);
-								//smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
-								//smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
-								//Tu poszukac bledu zlego nadpisania danych
+
 								smsg[4+data_inkrement*2] = Response1.data[data_inkrement].data_t[1];
 								smsg[3+data_inkrement*2] = Response1.data[data_inkrement].data_t[0];
 							}
 						smsg[0] = Response1.address;
 						smsg[1] = Response1.function;
 						smsg[2] = Response1.data_count;
+						//CRC checking
 						if(Ask1.crc.data_t[1] == msg[5] && Ask1.crc.data_t[0] == msg[6])
 						{
 							char data_heap_crc_res[Response1.data_count*2 + 3];
@@ -115,31 +114,40 @@ static void udp_thread(void *arg)
 								}
 							int length_crc_res = sizeof(data_heap_crc_res);
 							Response1.crc.data_u = CRC_check(data_heap_crc_res, length_crc_res, CRCTable);
-							//Response1.crc.data_u = 0x10FA;
+
 							smsg[5+reg_res-2] = Response1.crc.data_t[1];
 							smsg[6+reg_res-2] = Response1.crc.data_t[0];
-							//smsg[5+(data_inkrement*2)-2] = 0xDD;
-							//smsg[6+(data_inkrement*2)-2] = 0xFF;
+
 						}
 						else
 						{
-						smsg[5+(data_inkrement*2)-2] = 0xBA; //CRC1
-						smsg[6+(data_inkrement*2)-2] = 0xAB; //CRC2
+						//CRC error
+						smsg[5+(data_inkrement*2)-2] = 0xFF; //CRC1
+						smsg[6+(data_inkrement*2)-2] = 0xFF; //CRC2
 						}
 						len = 5+(data_inkrement*2);
 					}
-						else if (Ask1.address == 0x01 && Ask1.function == 0x06)
+					// If modbus function is 6 (setting one register)
+					else if (Ask1.address == 0x01 && Ask1.function == 0x06)
 						{
 							char data_heap_crc[5] = { Ask1.address, Ask1.function,
 													msg[2], msg[3], Ask1.reg_count };
 													int length_crc = sizeof(data_heap_crc);
 													Ask1.crc.data_u = CRC_check(data_heap_crc, length_crc, CRCTable);
-							reg_mdb[Response1.data_count] = (msg[2]<<8) + msg[3] ;
-
+							// Bytes are negated because 0 cannot be send (Server is stoping receiving then). U2 coding - negation + 1 on server side
+							reg_mdb[Response1.data_count - 1] = ~(msg[2]<<8) + ~msg[3] + 1;
+							len = length_crc + 2;
+							smsg[0] = Ask1.address;
+							smsg[1] = Ask1.function;
+							smsg[2] = 0x01;
+							smsg[3] = ~msg[2];
+							smsg[4] = ~msg[3];
+							smsg[5] = Ask1.crc.data_t[1];
+							smsg[6] = Ask1.crc.data_t[0];
 						}
 
 					else
-						{len = sprintf (smsg, "\"%s\" bledne zapytanie \n", msg);}
+						{len = sprintf (smsg, "\"%s\" CRC or function error \n", msg);}
 					// Or modify the message received, so that we can send it back to the client
 					//int len = sprintf (smsg, "\"%s\" was sent by the Client\n", (char *) buf->p->payload);
 
